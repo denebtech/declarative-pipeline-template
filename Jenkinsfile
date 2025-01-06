@@ -33,5 +33,17 @@ pipeline {
         echo "Deploying to staging..."
       }
     }
+    stage("Confirm deploy to production") {
+      steps {
+        timeout(time: 60, unit: "SECONDS") {
+          input(message: "Okay to deploy?", ok: "Let\'s do it!")
+        }
+      }
+    }
+    stage("Deploy to production") {
+      steps {
+        echo "Deploying to production..."
+      }
+    }
   }
 }
